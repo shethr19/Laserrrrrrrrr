@@ -1,3 +1,4 @@
+from time import sleep
 from tkinter import filedialog
 from tkinter import *
 import serial
@@ -8,17 +9,17 @@ filename = '/home/ben/Desktop/laserHTN/textCoordinates.txt'
 # root.filename =  filedialog.askopenfilename(initialdir = "/home/ben/Desktop",title = "Select file",filetypes = (("text files","*.txt"),("all files","*.*")))
 # print ('file: ' + root.filename)
 
-f = open(root.filename, 'r')
+f = open(filename, 'r')
 
 # serial setup
-laserElectronics = serial.Serial()
-laserElectronics.baudrate = 9600
-laserElectronics.port = 'COM5'
-laserElectronics.timeout = 1
-
+laserElectronics = serial.Serial(
+	port = '/dev/ttyACM0',
+	baudrate = 9600,
+	timeout = 1
+)
 
 # transmit to Arduino
 for line in f:
-	print()
-
+	laserElectronics.transmit(line)
+	sleep(2)
 f.close()
