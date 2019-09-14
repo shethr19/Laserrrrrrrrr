@@ -73,6 +73,7 @@ def writeCoordsToFile(coordSequence):
 
 	# append 'D' to ensure file is deleted off uC
 	f.write('D\n')
+	f.close()
 
 
 textCoordinates = generateCoordinates("A BCD ABC")
